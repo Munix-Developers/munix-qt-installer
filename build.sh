@@ -5,7 +5,7 @@ set -e -u
 iso_name=munix
 iso_label="ARCH_MUNIX_$(date +%Y%m)"
 iso_version=$(date +%Y.%m.%d)
-install_dir=arch
+install_dir=munix
 work_dir=work
 out_dir=out
 gpg_key=
@@ -158,7 +158,7 @@ make_efi() {
 
     sed "s|%ARCHISO_LABEL%|${iso_label}|g;
          s|%INSTALL_DIR%|${install_dir}|g" \
-        ${script_path}/efiboot/loader/entries/archiso-x86_64-usb.conf > ${work_dir}/iso/loader/entries/archiso-x86_64.conf
+        ${script_path}/efiboot/loader/entries/munix-x86_64-usb.conf > ${work_dir}/iso/loader/entries/munix-x86_64.conf
 
     # EFI Shell 2.0 for UEFI 2.3+
     curl -o ${work_dir}/iso/EFI/shellx64_v2.efi https://raw.githubusercontent.com/tianocore/edk2/master/ShellBinPkg/UefiShell/X64/Shell.efi
@@ -194,7 +194,7 @@ make_efiboot() {
 
     sed "s|%ARCHISO_LABEL%|${iso_label}|g;
          s|%INSTALL_DIR%|${install_dir}|g" \
-        ${script_path}/efiboot/loader/entries/archiso-x86_64-cd.conf > ${work_dir}/efiboot/loader/entries/archiso-x86_64.conf
+        ${script_path}/efiboot/loader/entries/munix-x86_64-cd.conf > ${work_dir}/efiboot/loader/entries/munix-x86_64.conf
 
     cp ${work_dir}/iso/EFI/shellx64_v2.efi ${work_dir}/efiboot/EFI/
     cp ${work_dir}/iso/EFI/shellx64_v1.efi ${work_dir}/efiboot/EFI/
