@@ -247,7 +247,7 @@ done
 # Ramdisk
 if [ ! -d ${work_dir} ]; then
     mkdir -p ${work_dir}
-    mount -t tmpfs -o size=4096m tmpfs ${work_dir}
+    mount -t tmpfs -o size=8000m tmpfs ${work_dir}
 fi
 
 run_once make_pacman_conf

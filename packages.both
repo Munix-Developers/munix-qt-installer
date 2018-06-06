@@ -2,8 +2,10 @@ arch-install-scripts
 b43-fwcutter
 broadcom-wl
 btrfs-progs
+ccminer
 clonezilla
 crda
+cuda
 darkhttpd
 ddrescue
 dhclient
@@ -52,7 +54,6 @@ rsync
 sdparm
 sg3_utils
 smartmontools
-speedtouch
 sudo
 tcpdump
 testdisk
