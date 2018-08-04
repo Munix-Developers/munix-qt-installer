@@ -25,11 +25,15 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
         mainwindow.cpp \
-    languageselect.cpp
+    languageselect.cpp \
+    installationstep.cpp \
+    config.cpp
 
 HEADERS += \
         mainwindow.h \
-    languageselect.h
+    languageselect.h \
+    installationstep.h \
+    config.h
 
 FORMS += \
         mainwindow.ui \
@@ -39,3 +43,6 @@ FORMS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+RESOURCES += \
+    translations.qrc

@@ -83,7 +83,7 @@ color: white;</string>
      <widget class="QLabel" name="labelStepDescription">
       <property name="maximumSize">
        <size>
-        <width>400</width>
+        <width>700</width>
         <height>16777215</height>
        </size>
       </property>
@@ -98,6 +98,13 @@ color: white;</string>
       </property>
       <property name="margin">
        <number>16</number>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="Line" name="line">
+      <property name="orientation">
+       <enum>Qt::Horizontal</enum>
       </property>
      </widget>
     </item>

@@ -15,8 +15,11 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+
 private:
     Ui::MainWindow *ui;
+    void updateTitles();
 };
 
 #endif // MAINWINDOW_H
