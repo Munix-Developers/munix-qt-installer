@@ -6,7 +6,7 @@
 
 QT       += core gui widgets
 
-TARGET = qt-widgets
+TARGET = munix-installer
 TEMPLATE = app
 
 # The following define makes your compiler emit warnings if you use
