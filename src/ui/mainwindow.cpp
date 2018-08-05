@@ -19,12 +19,21 @@ MainWindow::MainWindow(QWidget *parent, QTranslator *translator) :
     //loadLanguage("pt_br");
 
     // Connect the language change event
-    // TODO: this is fixed, need to receive from cmd line
+    // TODO: this is fixed, need to receive lang from cmd line
     connect(ui->languageselect, SIGNAL(langChanged(QString)),
                      this, SLOT(loadLanguage(QString)));
 
+    // This is needed to change strings at runtime
+    connect(this, SIGNAL(langChanged()),
+            ui->partitionSelect, SLOT(retranslate()));
+
+    // Next step buttons events
     connect(ui->languageselect, SIGNAL(stepFinished()),
             this, SLOT(nextStep()));
+
+    // Back buttons events
+    connect(ui->partitionSelect, SIGNAL(back()),
+            this, SLOT(previousStep()));
 }
 
 MainWindow::~MainWindow()
@@ -51,12 +60,25 @@ void MainWindow::loadLanguage(QString langCode)
     QCoreApplication::installTranslator(local_translator);
     ui->retranslateUi(this);
 
+    langChanged();
+
     updateTitles();
 }
 
 void MainWindow::nextStep()
 {
     int nextStep = (ui->installsteps->currentIndex() + 1) % ui->installsteps->count();
+
+    ui->installsteps->setCurrentIndex(nextStep);
+
+    updateTitles();
+}
+
+void MainWindow::previousStep()
+{
+    int nextStep = ui->installsteps->currentIndex() - 1;
+
+    nextStep = nextStep < 0 ? 0:nextStep;
 
     ui->installsteps->setCurrentIndex(nextStep);
 

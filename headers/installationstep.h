@@ -14,8 +14,10 @@ public:
 
 signals:
     void stepFinished();
+    void back();
 
 public slots:
+    void retranslate();
 };
 
 #endif // INSTALLATIONSTEP_H

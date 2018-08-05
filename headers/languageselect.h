@@ -30,6 +30,8 @@ private slots:
 
     void on_nextStep_released();
 
+    void retranslate();
+
 private:
     Ui::LanguageSelect *ui;
     void genLangList();

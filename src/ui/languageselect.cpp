@@ -52,10 +52,15 @@ void LanguageSelect::on_listLanguageSelect_currentItemChanged(QListWidgetItem *c
     QString selectedLang = current->data(Qt::UserRole).toString();
     langChanged(selectedLang);
 
-    ui->retranslateUi(this);
+    retranslate();
 }
 
 void LanguageSelect::on_nextStep_released()
 {
     stepFinished();
+}
+
+void LanguageSelect::retranslate()
+{
+    ui->retranslateUi(this);
 }

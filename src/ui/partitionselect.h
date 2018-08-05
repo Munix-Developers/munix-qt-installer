@@ -21,6 +21,15 @@ public:
     QString desc();
 private:
     Ui::PartitionSelect *ui;
+
+public slots:
+    void retranslate();
+
+signals:
+    void stepFinished();
+    void back();
+private slots:
+    void on_back_released();
 };
 
 #endif // PARTITIONSELECT_H

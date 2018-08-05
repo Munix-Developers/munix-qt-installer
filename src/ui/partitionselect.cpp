@@ -22,3 +22,13 @@ QString PartitionSelect::desc()
 {
     return tr("Here you can select what disk partition will be used for the installation. Currently there isn't support for dual-boot.");
 }
+
+void PartitionSelect::retranslate()
+{
+    ui->retranslateUi(this);
+}
+
+void PartitionSelect::on_back_released()
+{
+    back();
+}

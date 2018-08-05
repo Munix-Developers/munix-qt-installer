@@ -12,3 +12,7 @@ QString InstallationStep::desc()
 {
     return "";
 }
+
+void InstallationStep::retranslate() {
+
+}
