@@ -1,6 +1,6 @@
-#include "languageselect.h"
-#include "mainwindow.h"
-#include "installationstep.h"
+#include "headers/languageselect.h"
+#include "headers/mainwindow.h"
+#include "headers/installationstep.h"
 #include "ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent, QTranslator *translator) :

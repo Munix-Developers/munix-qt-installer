@@ -1,10 +1,10 @@
 #ifndef LANGUAGESELECT_H
 #define LANGUAGESELECT_H
 
-#include "installationstep.h"
-
 #include <QListWidgetItem>
 #include <QWidget>
+
+#include "installationstep.h"
 
 namespace Ui {
 class LanguageSelect;

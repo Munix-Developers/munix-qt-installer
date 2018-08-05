@@ -1,4 +1,4 @@
-#include "installationstep.h"
+#include "headers/installationstep.h"
 
 InstallationStep::InstallationStep(QWidget *parent) : QWidget(parent)
 { }

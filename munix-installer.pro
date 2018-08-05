@@ -23,19 +23,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        main.cpp \
-        mainwindow.cpp \
-    languageselect.cpp \
-    installationstep.cpp
+        src/main.cpp \
+        src/ui/mainwindow.cpp \
+    src/ui/languageselect.cpp \
+    src/interfaces/installationstep.cpp
 
 HEADERS += \
-        mainwindow.h \
-    languageselect.h \
-    installationstep.h
+        headers/mainwindow.h \
+    headers/languageselect.h \
+    headers/installationstep.h
 
 FORMS += \
-        mainwindow.ui \
-    languageselect.ui
+        ui/mainwindow.ui \
+    ui/languageselect.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
@@ -43,4 +43,4 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    translations.qrc
+    resources/translations/translations.qrc
