@@ -112,9 +112,9 @@ color: white;</string>
      </widget>
     </item>
     <item>
-     <widget class="QStackedWidget" name="installSteps">
+     <widget class="QStackedWidget" name="installsteps">
       <widget class="LanguageSelect" name="languageselect"/>
-      <widget class="QWidget" name="page_2"/>
+      <widget class="PartitionSelect" name="partitionSelect"/>
      </widget>
     </item>
    </layout>
@@ -136,6 +136,12 @@ color: white;</string>
    <class>LanguageSelect</class>
    <extends>QWidget</extends>
    <header>languageselect.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PartitionSelect</class>
+   <extends>QWidget</extends>
+   <header>partitionselect.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

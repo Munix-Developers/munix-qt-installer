@@ -26,16 +26,19 @@ SOURCES += \
         src/main.cpp \
         src/ui/mainwindow.cpp \
     src/ui/languageselect.cpp \
-    src/interfaces/installationstep.cpp
+    src/interfaces/installationstep.cpp \
+    src/ui/partitionselect.cpp
 
 HEADERS += \
         headers/mainwindow.h \
     headers/languageselect.h \
-    headers/installationstep.h
+    headers/installationstep.h \
+    src/ui/partitionselect.h
 
 FORMS += \
         ui/mainwindow.ui \
-    ui/languageselect.ui
+    ui/languageselect.ui \
+    src/ui/partitionselect.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -47,11 +47,15 @@ QString LanguageSelect::desc()
     return tr("This installation wizard will guide you through the installation process. Start by selecting your language below.");
 }
 
-
 void LanguageSelect::on_listLanguageSelect_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous)
 {
     QString selectedLang = current->data(Qt::UserRole).toString();
     langChanged(selectedLang);
 
     ui->retranslateUi(this);
+}
+
+void LanguageSelect::on_nextStep_released()
+{
+    stepFinished();
 }

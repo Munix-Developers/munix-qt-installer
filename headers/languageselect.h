@@ -23,9 +23,12 @@ public:
 
 signals:
     void langChanged(QString langCode);
+    void stepFinished();
 
 private slots:
     void on_listLanguageSelect_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+
+    void on_nextStep_released();
 
 private:
     Ui::LanguageSelect *ui;

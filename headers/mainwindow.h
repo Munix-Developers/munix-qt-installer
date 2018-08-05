@@ -19,10 +19,13 @@ public:
 private slots:
     void updateTitles();
     void loadLanguage(QString langCode);
+    void nextStep();
 
 private:
     Ui::MainWindow *ui;
     QTranslator *local_translator;
+
+    int curInstallIdx = 0;
 };
 
 #endif // MAINWINDOW_H

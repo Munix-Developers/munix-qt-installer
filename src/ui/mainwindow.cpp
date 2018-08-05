@@ -22,6 +22,9 @@ MainWindow::MainWindow(QWidget *parent, QTranslator *translator) :
     // TODO: this is fixed, need to receive from cmd line
     connect(ui->languageselect, SIGNAL(langChanged(QString)),
                      this, SLOT(loadLanguage(QString)));
+
+    connect(ui->languageselect, SIGNAL(stepFinished()),
+            this, SLOT(nextStep()));
 }
 
 MainWindow::~MainWindow()
@@ -36,7 +39,7 @@ MainWindow::~MainWindow()
  */
 void MainWindow::updateTitles()
 {
-    InstallationStep *step = qobject_cast<InstallationStep*>(ui->installSteps->currentWidget());
+    InstallationStep *step = qobject_cast<InstallationStep*>(ui->installsteps->currentWidget());
 
     ui->labelCurrentStep->setText(step->title());
     ui->labelStepDescription->setText(step->desc());
@@ -47,6 +50,15 @@ void MainWindow::loadLanguage(QString langCode)
     local_translator->load(QString(":/translations/%1.qm").arg(langCode));
     QCoreApplication::installTranslator(local_translator);
     ui->retranslateUi(this);
+
+    updateTitles();
+}
+
+void MainWindow::nextStep()
+{
+    int nextStep = (ui->installsteps->currentIndex() + 1) % ui->installsteps->count();
+
+    ui->installsteps->setCurrentIndex(nextStep);
 
     updateTitles();
 }
