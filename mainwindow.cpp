@@ -3,7 +3,7 @@
 #include "installationstep.h"
 #include "ui_mainwindow.h"
 
-MainWindow::MainWindow(QWidget *parent) :
+MainWindow::MainWindow(QWidget *parent, QTranslator *translator) :
     QMainWindow(parent),
     ui(new Ui::MainWindow)
 {
@@ -12,12 +12,21 @@ MainWindow::MainWindow(QWidget *parent) :
     // Disable resizing
     setFixedSize(800, 600);
 
-    // Translate the first step
-    updateTitles();
+    // Setup the instance of the translator
+    local_translator = translator;
+
+    // Load a language
+    //loadLanguage("pt_br");
+
+    // Connect the language change event
+    // TODO: this is fixed, need to receive from cmd line
+    connect(ui->languageselect, SIGNAL(langChanged(QString)),
+                     this, SLOT(loadLanguage(QString)));
 }
 
 MainWindow::~MainWindow()
 {
+    delete local_translator;
     delete ui;
 }
 
@@ -27,8 +36,17 @@ MainWindow::~MainWindow()
  */
 void MainWindow::updateTitles()
 {
-    InstallationStep *step = static_cast<InstallationStep*>(ui->installSteps->currentWidget());
+    InstallationStep *step = qobject_cast<InstallationStep*>(ui->installSteps->currentWidget());
 
     ui->labelCurrentStep->setText(step->title());
     ui->labelStepDescription->setText(step->desc());
+}
+
+void MainWindow::loadLanguage(QString langCode)
+{
+    local_translator->load(QString(":/translations/%1.qm").arg(langCode));
+    QCoreApplication::installTranslator(local_translator);
+    ui->retranslateUi(this);
+
+    updateTitles();
 }

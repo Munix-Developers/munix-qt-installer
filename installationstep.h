@@ -13,6 +13,7 @@ public:
     virtual QString desc();
 
 signals:
+    void languageChanged(QString langCode);
 
 public slots:
 };

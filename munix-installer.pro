@@ -26,14 +26,12 @@ SOURCES += \
         main.cpp \
         mainwindow.cpp \
     languageselect.cpp \
-    installationstep.cpp \
-    config.cpp
+    installationstep.cpp
 
 HEADERS += \
         mainwindow.h \
     languageselect.h \
-    installationstep.h \
-    config.h
+    installationstep.h
 
 FORMS += \
         mainwindow.ui \

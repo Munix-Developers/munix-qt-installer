@@ -3,6 +3,7 @@
 
 #include "installationstep.h"
 
+#include <QListWidgetItem>
 #include <QWidget>
 
 namespace Ui {
@@ -20,9 +21,16 @@ public:
     QString title();
     QString desc();
 
+signals:
+    void langChanged(QString langCode);
+
+private slots:
+    void on_listLanguageSelect_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
+
 private:
     Ui::LanguageSelect *ui;
     void genLangList();
+
 };
 
 #endif // LANGUAGESELECT_H
