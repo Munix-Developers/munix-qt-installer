@@ -1,5 +1,7 @@
 #include "partitionselect.h"
 
+#include <QDirIterator>
+#include <QDebug>
 #include <ui_partitionselect.h>
 
 PartitionSelect::PartitionSelect(QWidget *parent) :
@@ -39,10 +41,47 @@ void PartitionSelect::on_back_released()
 
 void PartitionSelect::onCheckboxToggled(bool checked)
 {
-    // TODO: may break the checkbox logic?
+    // TODO: may break the exclusive checkbox logic?
     if (!checked) {
         ui->deleteEverything->setChecked(true);
     }
 
     ui->next->setEnabled(true);
+}
+
+// TODO: move the implementation of this to another class
+long long int PartitionSelect::getDevSize(QString device) {
+    // Open device size descriptor
+    QFile devSize(device.append("/size"));
+    devSize.open(QIODevice::ReadOnly);
+
+    // Device bytes is in long long
+    return devSize.readAll().trimmed().toLongLong();
+}
+
+void PartitionSelect::on_next_released()
+{
+    // Iterates over all the block devices (disks)
+    QDirIterator devs("/sys/block/", QStringList() << "sd*", QDir::NoFilter, QDirIterator::Subdirectories);
+
+    QLocale locale = this->locale();
+
+    while (devs.hasNext()) {
+        // Get device name
+        QFile device(devs.next());
+        QFileInfo devInfo(device);
+        QString devName = devInfo.fileName();
+
+        qDebug() << devName << ": " << locale.formattedDataSize(getDevSize(device.fileName()));
+
+        QDirIterator partitions(device.fileName(), QStringList() << devName.append('*'), QDir::NoFilter, QDirIterator::Subdirectories);
+
+        while (partitions.hasNext()) {
+            QFile part(partitions.next());
+            QFileInfo partInfo(part.fileName());
+            QString partName = partInfo.fileName();
+
+            qDebug() << partName << ": " << locale.formattedDataSize(getDevSize(part.fileName()), 1, QLocale::DataSizeSIFormat);
+        }
+    }
 }
