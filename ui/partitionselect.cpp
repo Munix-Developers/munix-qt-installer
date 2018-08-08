@@ -7,6 +7,9 @@ PartitionSelect::PartitionSelect(QWidget *parent) :
     ui(new Ui::PartitionSelect)
 {
     ui->setupUi(this);
+
+    connect(ui->deleteEverything, SIGNAL(toggled(bool)),
+            this, SLOT(onCheckboxToggled(bool)));
 }
 
 PartitionSelect::~PartitionSelect()
@@ -32,4 +35,14 @@ void PartitionSelect::retranslate()
 void PartitionSelect::on_back_released()
 {
     back();
+}
+
+void PartitionSelect::onCheckboxToggled(bool checked)
+{
+    // TODO: may break the checkbox logic?
+    if (!checked) {
+        ui->deleteEverything->setChecked(true);
+    }
+
+    ui->next->setEnabled(true);
 }

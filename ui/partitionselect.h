@@ -30,6 +30,7 @@ signals:
     void back();
 private slots:
     void on_back_released();
+    void onCheckboxToggled(bool checked);
 };
 
 #endif // PARTITIONSELECT_H
