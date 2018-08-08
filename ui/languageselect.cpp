@@ -1,7 +1,7 @@
 #include <QMessageBox>
 #include <iostream>
 
-#include "headers/languageselect.h"
+#include "ui/languageselect.h"
 #include <ui_languageselect.h>
 
 LanguageSelect::LanguageSelect(QWidget *parent) :

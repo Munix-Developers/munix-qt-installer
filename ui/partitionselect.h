@@ -3,7 +3,7 @@
 
 #include <QWidget>
 
-#include <headers/installationstep.h>
+#include <ui/common/installationstep.h>
 
 namespace Ui {
 class PartitionSelect;

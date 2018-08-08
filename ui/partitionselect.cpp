@@ -1,5 +1,6 @@
 #include "partitionselect.h"
-#include "ui_partitionselect.h"
+
+#include <ui_partitionselect.h>
 
 PartitionSelect::PartitionSelect(QWidget *parent) :
     InstallationStep (parent),

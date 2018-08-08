@@ -4,7 +4,7 @@
 #include <QListWidgetItem>
 #include <QWidget>
 
-#include "installationstep.h"
+#include "ui/common/installationstep.h"
 
 namespace Ui {
 class LanguageSelect;

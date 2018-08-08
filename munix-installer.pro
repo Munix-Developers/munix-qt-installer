@@ -23,22 +23,22 @@ DEFINES += QT_DEPRECATED_WARNINGS
 CONFIG += c++11
 
 SOURCES += \
-        src/main.cpp \
-        src/ui/mainwindow.cpp \
-    src/ui/languageselect.cpp \
-    src/interfaces/installationstep.cpp \
-    src/ui/partitionselect.cpp
+        ui/main.cpp \
+        ui/mainwindow.cpp \
+    ui/languageselect.cpp \
+    ui/partitionselect.cpp \
+    ui/common/installationstep.cpp
 
 HEADERS += \
-        headers/mainwindow.h \
-    headers/languageselect.h \
-    headers/installationstep.h \
-    src/ui/partitionselect.h
+        ui/mainwindow.h \
+    ui/languageselect.h \
+    ui/common/installationstep.h \
+    ui/partitionselect.h
 
 FORMS += \
-        ui/mainwindow.ui \
-    ui/languageselect.ui \
-    src/ui/partitionselect.ui
+        forms/mainwindow.ui \
+    forms/languageselect.ui \
+    forms/partitionselect.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
