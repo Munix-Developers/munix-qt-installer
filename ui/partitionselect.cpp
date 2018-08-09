@@ -50,12 +50,13 @@ void PartitionSelect::onCheckboxToggled(bool checked)
 }
 
 // TODO: move the implementation of this to another class
-long long int PartitionSelect::getDevSize(QString device) {
+long long int PartitionSelect::getBytesDevSize(QString device) {
     // Open device size descriptor
     QFile devSize(device.append("/size"));
     devSize.open(QIODevice::ReadOnly);
 
     // Device bytes is in long long
+    // https://github.com/karelzak/util-linux/blob/05541825553524e2ac353eb6c62c8b5ad049de24/misc-utils/lsblk.c#L1284
     return devSize.readAll().trimmed().toLongLong() << 9;
 }
 
@@ -72,7 +73,7 @@ void PartitionSelect::on_next_released()
         QFileInfo devInfo(device);
         QString devName = devInfo.fileName();
 
-        qDebug() << devName << ": " << locale.formattedDataSize(getDevSize(device.fileName()));
+        qDebug() << devName << ": " << locale.formattedDataSize(getBytesDevSize(device.fileName()));
 
         QDirIterator partitions(device.fileName(), QStringList() << devName.append('*'), QDir::NoFilter, QDirIterator::Subdirectories);
 
@@ -81,7 +82,7 @@ void PartitionSelect::on_next_released()
             QFileInfo partInfo(part.fileName());
             QString partName = partInfo.fileName();
 
-            qDebug() << partName << ": " << locale.formattedDataSize(getDevSize(part.fileName()), 1, QLocale::DataSizeSIFormat);
+            qDebug() << partName << ": " << locale.formattedDataSize(getBytesDevSize(part.fileName()), 1, QLocale::DataSizeSIFormat);
         }
     }
 }

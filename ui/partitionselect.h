@@ -23,7 +23,7 @@ public:
 private:
     Ui::PartitionSelect *ui;
 
-    long long getDevSize(QString device);
+    long long getBytesDevSize(QString device);
 public slots:
     void retranslate();
 
