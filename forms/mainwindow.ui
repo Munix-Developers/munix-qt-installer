@@ -60,7 +60,7 @@
        </size>
       </property>
       <property name="cursor">
-       <cursorShape>WhatsThisCursor</cursorShape>
+       <cursorShape>ArrowCursor</cursorShape>
       </property>
       <property name="styleSheet">
        <string notr="true">background-color: qlineargradient(spread:pad, x1:0, y1:1, x2:1, y2:0, stop:0 rgba(12, 62, 135, 255), stop:1 rgba(91, 131, 190, 255));

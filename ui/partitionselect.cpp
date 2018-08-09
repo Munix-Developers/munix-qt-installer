@@ -56,7 +56,7 @@ long long int PartitionSelect::getDevSize(QString device) {
     devSize.open(QIODevice::ReadOnly);
 
     // Device bytes is in long long
-    return devSize.readAll().trimmed().toLongLong();
+    return devSize.readAll().trimmed().toLongLong() << 9;
 }
 
 void PartitionSelect::on_next_released()
