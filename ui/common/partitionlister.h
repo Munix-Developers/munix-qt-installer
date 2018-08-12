@@ -1,13 +1,9 @@
 #ifndef PARTITIONLISTER_H
 #define PARTITIONLISTER_H
 
-#include "treemodel.h"
-#include "treeitem.h"
-
 #include <QStandardItemModel>
 #include <QString>
 #include <QTreeWidget>
-
 
 class PartitionLister
 {
