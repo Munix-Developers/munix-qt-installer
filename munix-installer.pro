@@ -27,13 +27,19 @@ SOURCES += \
         ui/mainwindow.cpp \
     ui/languageselect.cpp \
     ui/partitionselect.cpp \
-    ui/common/installationstep.cpp
+    ui/common/installationstep.cpp \
+    ui/common/partitionlister.cpp \
+    ui/common/treeitem.cpp \
+    ui/common/treemodel.cpp
 
 HEADERS += \
         ui/mainwindow.h \
     ui/languageselect.h \
     ui/common/installationstep.h \
-    ui/partitionselect.h
+    ui/partitionselect.h \
+    ui/common/partitionlister.h \
+    ui/common/treeitem.h \
+    ui/common/treemodel.h
 
 FORMS += \
         forms/mainwindow.ui \

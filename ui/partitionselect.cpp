@@ -4,6 +4,8 @@
 #include <QDebug>
 #include <ui_partitionselect.h>
 
+#include <ui/common/partitionlister.h>
+
 PartitionSelect::PartitionSelect(QWidget *parent) :
     InstallationStep (parent),
     ui(new Ui::PartitionSelect)
@@ -12,10 +14,15 @@ PartitionSelect::PartitionSelect(QWidget *parent) :
 
     connect(ui->deleteEverything, SIGNAL(toggled(bool)),
             this, SLOT(onCheckboxToggled(bool)));
+    connect(ui->reloadPartitions, SIGNAL(clicked()),
+            this, SLOT(reloadPartitions()));
+
+    partLister = new PartitionLister();
 }
 
 PartitionSelect::~PartitionSelect()
 {
+    delete partLister;
     delete ui;
 }
 
@@ -45,44 +52,36 @@ void PartitionSelect::onCheckboxToggled(bool checked)
     if (!checked) {
         ui->deleteEverything->setChecked(true);
     }
-
-    ui->next->setEnabled(true);
+    else {
+        // TODO: this isn't dynamic, any other checkbox requires duplicate code
+        ui->partitionList->setEnabled(true);
+        ui->reloadPartitions->setEnabled(true);
+        ui->labelWhereInstall->setEnabled(true);
+        reloadPartitions();
+    }
 }
 
-// TODO: move the implementation of this to another class
-long long int PartitionSelect::getBytesDevSize(QString device) {
-    // Open device size descriptor
-    QFile devSize(device.append("/size"));
-    devSize.open(QIODevice::ReadOnly);
-
-    // Device bytes is in long long
-    // https://github.com/karelzak/util-linux/blob/05541825553524e2ac353eb6c62c8b5ad049de24/misc-utils/lsblk.c#L1284
-    return devSize.readAll().trimmed().toLongLong() << 9;
-}
-
-void PartitionSelect::on_next_released()
+void PartitionSelect::reloadPartitions()
 {
-    // Iterates over all the block devices (disks)
-    QDirIterator devs("/sys/block/", QStringList() << "sd*", QDir::NoFilter, QDirIterator::Subdirectories);
+    partLister->devicesToTreeWidget(ui->partitionList, this->locale());
+}
 
-    QLocale locale = this->locale();
+void PartitionSelect::on_next_clicked()
+{
+}
 
-    while (devs.hasNext()) {
-        // Get device name
-        QFile device(devs.next());
-        QFileInfo devInfo(device);
-        QString devName = devInfo.fileName();
+void PartitionSelect::on_partitionList_itemSelectionChanged()
+{
+    auto list = ui->partitionList->selectedItems();
 
-        qDebug() << devName << ": " << locale.formattedDataSize(getBytesDevSize(device.fileName()));
+    if (list.size() > 0) {
+        auto selectedPartition = list.first();
 
-        QDirIterator partitions(device.fileName(), QStringList() << devName.append('*'), QDir::NoFilter, QDirIterator::Subdirectories);
+        qDebug() << selectedPartition->data(1, Qt::UserRole);
 
-        while (partitions.hasNext()) {
-            QFile part(partitions.next());
-            QFileInfo partInfo(part.fileName());
-            QString partName = partInfo.fileName();
-
-            qDebug() << partName << ": " << locale.formattedDataSize(getBytesDevSize(part.fileName()), 1, QLocale::DataSizeSIFormat);
-        }
+        ui->next->setEnabled(true);
+    }
+    else {
+        ui->next->setEnabled(false);
     }
 }

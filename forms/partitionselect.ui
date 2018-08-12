@@ -49,7 +49,7 @@
           <number>0</number>
          </property>
          <property name="rightMargin">
-          <number>0</number>
+          <number>6</number>
          </property>
          <property name="bottomMargin">
           <number>6</number>
@@ -124,13 +124,105 @@
           <layout class="QVBoxLayout" name="verticalLayout"/>
          </item>
          <item>
-          <widget class="QTreeView" name="treeView">
-           <property name="maximumSize">
-            <size>
-             <width>400</width>
-             <height>16777215</height>
-            </size>
+          <widget class="QLabel" name="labelWhereInstall">
+           <property name="enabled">
+            <bool>false</bool>
            </property>
+           <property name="styleSheet">
+            <string notr="true">font-weight: bold;</string>
+           </property>
+           <property name="text">
+            <string>Select the disk where Munix will be installed:</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <item>
+            <spacer name="horizontalSpacer">
+             <property name="orientation">
+              <enum>Qt::Horizontal</enum>
+             </property>
+             <property name="sizeHint" stdset="0">
+              <size>
+               <width>40</width>
+               <height>20</height>
+              </size>
+             </property>
+            </spacer>
+           </item>
+           <item>
+            <widget class="QPushButton" name="reloadPartitions">
+             <property name="enabled">
+              <bool>false</bool>
+             </property>
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
+             <property name="maximumSize">
+              <size>
+               <width>16777215</width>
+               <height>16777215</height>
+              </size>
+             </property>
+             <property name="mouseTracking">
+              <bool>false</bool>
+             </property>
+             <property name="toolTip">
+              <string>Re-scan partitions</string>
+             </property>
+             <property name="text">
+              <string>Re-scan</string>
+             </property>
+             <property name="icon">
+              <iconset theme="reload"/>
+             </property>
+            </widget>
+           </item>
+          </layout>
+         </item>
+         <item>
+          <widget class="QTreeWidget" name="partitionList">
+           <property name="enabled">
+            <bool>false</bool>
+           </property>
+           <property name="tabKeyNavigation">
+            <bool>false</bool>
+           </property>
+           <property name="alternatingRowColors">
+            <bool>true</bool>
+           </property>
+           <property name="selectionBehavior">
+            <enum>QAbstractItemView::SelectRows</enum>
+           </property>
+           <property name="indentation">
+            <number>20</number>
+           </property>
+           <property name="itemsExpandable">
+            <bool>true</bool>
+           </property>
+           <property name="sortingEnabled">
+            <bool>true</bool>
+           </property>
+           <property name="columnCount">
+            <number>2</number>
+           </property>
+           <attribute name="headerStretchLastSection">
+            <bool>true</bool>
+           </attribute>
+           <column>
+            <property name="text">
+             <string>Device</string>
+            </property>
+           </column>
+           <column>
+            <property name="text">
+             <string>Size</string>
+            </property>
+           </column>
           </widget>
          </item>
         </layout>

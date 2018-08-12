@@ -55,12 +55,12 @@ void LanguageSelect::on_listLanguageSelect_currentItemChanged(QListWidgetItem *c
     retranslate();
 }
 
-void LanguageSelect::on_nextStep_released()
-{
-    stepFinished();
-}
-
 void LanguageSelect::retranslate()
 {
     ui->retranslateUi(this);
+}
+
+void LanguageSelect::on_nextStep_clicked()
+{
+    stepFinished();
 }

@@ -28,9 +28,9 @@ signals:
 private slots:
     void on_listLanguageSelect_currentItemChanged(QListWidgetItem *current, QListWidgetItem *previous);
 
-    void on_nextStep_released();
-
     void retranslate();
+
+    void on_nextStep_clicked();
 
 private:
     Ui::LanguageSelect *ui;
