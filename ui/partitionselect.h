@@ -39,6 +39,7 @@ private slots:
     void on_next_clicked();
     void on_partitionList_itemSelectionChanged();
     void reloadPartitions();
+    void proccessOutput();
 };
 
 #endif // PARTITIONSELECT_H

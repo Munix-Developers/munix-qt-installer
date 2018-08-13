@@ -1,8 +1,10 @@
 #include "ui/languageselect.h"
 #include "ui/mainwindow.h"
 #include "ui/common/installationstep.h"
+#include "ui/common/installsettings.h"
 
 #include <ui_mainwindow.h>
+#include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent, QTranslator *translator) :
     QMainWindow(parent),
@@ -55,15 +57,23 @@ void MainWindow::updateTitles()
     ui->labelStepDescription->setText(step->desc());
 }
 
-void MainWindow::loadLanguage(QString langCode)
+void MainWindow::loadLanguage(QString localeCode)
 {
-    local_translator->load(QString(":/translations/%1.qm").arg(langCode));
+    local_translator->load(QString(":/translations/%1.qm").arg(localeCode));
     QCoreApplication::installTranslator(local_translator);
     ui->retranslateUi(this);
 
     langChanged();
 
     updateTitles();
+
+    // Send the language to installsettings
+    QStringList codes = localeCode.split("_");
+    QString langCode = codes.first();
+    QString countryCode = codes.last();
+
+    InstallSettings::getInstance().setLangCode(langCode);
+    InstallSettings::getInstance().setCountryCode(countryCode);
 }
 
 void MainWindow::nextStep()

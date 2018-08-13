@@ -28,14 +28,16 @@ SOURCES += \
     ui/languageselect.cpp \
     ui/partitionselect.cpp \
     ui/common/installationstep.cpp \
-    ui/common/partitionlister.cpp
+    ui/common/partitionlister.cpp \
+    ui/common/installsettings.cpp
 
 HEADERS += \
         ui/mainwindow.h \
     ui/languageselect.h \
     ui/common/installationstep.h \
     ui/partitionselect.h \
-    ui/common/partitionlister.h
+    ui/common/partitionlister.h \
+    ui/common/installsettings.h
 
 FORMS += \
         forms/mainwindow.ui \
@@ -48,4 +50,5 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
 
 RESOURCES += \
-    resources/translations/translations.qrc
+    resources/translations/translations.qrc \
+    resources/scripts/scripts.qrc

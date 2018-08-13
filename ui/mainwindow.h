@@ -21,7 +21,7 @@ signals:
 
 private slots:
     void updateTitles();
-    void loadLanguage(QString langCode);
+    void loadLanguage(QString localeCode);
 
     void nextStep();
     void previousStep();

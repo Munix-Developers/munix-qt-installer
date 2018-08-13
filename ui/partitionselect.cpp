@@ -3,8 +3,12 @@
 #include <QDirIterator>
 #include <QDebug>
 #include <ui_partitionselect.h>
+#include <QProcess>
 
 #include <ui/common/partitionlister.h>
+#include <ui/common/installsettings.h>
+
+QProcess *process;
 
 PartitionSelect::PartitionSelect(QWidget *parent) :
     InstallationStep (parent),
@@ -66,8 +70,25 @@ void PartitionSelect::reloadPartitions()
     partLister->devicesToTreeWidget(ui->partitionList, this->locale());
 }
 
+void PartitionSelect::proccessOutput()
+{
+    qDebug() << QString(process->readAllStandardOutput());
+    qDebug() << process->readAllStandardError();
+}
+
 void PartitionSelect::on_next_clicked()
 {
+    QFile file(":/scripts/debug-env-vars.sh");
+    file.open(QIODevice::ReadOnly | QIODevice::Text);
+    QStringList arg;
+    arg << "-c";
+
+    process = new QProcess(this);
+    connect(process, SIGNAL(readyReadStandardOutput()), this, SLOT(proccessOutput()));
+    connect(process, SIGNAL(readyReadStandardError()), this, SLOT(proccessOutput()));
+
+    arg << file.readAll();
+    process->start("/bin/bash", arg);
 }
 
 void PartitionSelect::on_partitionList_itemSelectionChanged()
@@ -77,7 +98,8 @@ void PartitionSelect::on_partitionList_itemSelectionChanged()
     if (list.size() > 0) {
         auto selectedPartition = list.first();
 
-        qDebug() << selectedPartition->data(1, Qt::UserRole);
+        InstallSettings::getInstance().setDevName(selectedPartition->text(0));
+        InstallSettings::getInstance().sendToSystem();
 
         ui->next->setEnabled(true);
     }

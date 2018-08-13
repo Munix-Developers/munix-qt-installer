@@ -22,8 +22,8 @@ LanguageSelect::~LanguageSelect()
 void LanguageSelect::genLangList() {
     QMap<QString, QString> langs;
 
-    langs.insert("en_us", "English (USA)");
-    langs.insert("pt_br", "Português (Brasil)");
+    langs.insert("en_US", "English (USA)");
+    langs.insert("pt_BR", "Português (Brasil)");
 
     int row = 0;
     for (auto lang : langs.keys())
