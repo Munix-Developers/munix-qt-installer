@@ -14,8 +14,9 @@
 # 1. Root privileges
 # 2. A active Internet connection
 
-# chroot to the pacman base created by the pre-installation.sh
-arch-chroot /mnt /bin/bash
+# This is the post-install script, executed inside chroot
+cat <<EOF > /mnt/post-install.sh
+#!/bin/sh
 
 # Uncomment the desired location
 sed -i "s/^#${MLANG}\(\.*\)/${MLANG}\1/g" /etc/locale.gen
@@ -25,5 +26,10 @@ locale-gen
 echo "LANG=${MLANG}.UTF-8" > /etc/locale.conf
 export LANG=${MLANG}.UTF-8
 
-echo
+exit
+EOF
 
+chmod +x /mnt/post-install.sh
+
+# chroot to the pacman base created by the pre-installation.sh
+arch-chroot /mnt /mnt/post-install.sh

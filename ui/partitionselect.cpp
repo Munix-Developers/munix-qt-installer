@@ -78,6 +78,8 @@ void PartitionSelect::proccessOutput()
 
 void PartitionSelect::on_next_clicked()
 {
+    InstallSettings::getInstance().sendToSystem();
+
     QFile file(":/scripts/debug-env-vars.sh");
     file.open(QIODevice::ReadOnly | QIODevice::Text);
     QStringList arg;
@@ -99,7 +101,6 @@ void PartitionSelect::on_partitionList_itemSelectionChanged()
         auto selectedPartition = list.first();
 
         InstallSettings::getInstance().setDevName(selectedPartition->text(0));
-        InstallSettings::getInstance().sendToSystem();
 
         ui->next->setEnabled(true);
     }

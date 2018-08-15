@@ -67,13 +67,6 @@ void MainWindow::loadLanguage(QString localeCode)
 
     updateTitles();
 
-    // Send the language to installsettings
-    QStringList codes = localeCode.split("_");
-    QString langCode = codes.first();
-    QString countryCode = codes.last();
-
-    InstallSettings::getInstance().setLangCode(langCode);
-    InstallSettings::getInstance().setCountryCode(countryCode);
 }
 
 void MainWindow::nextStep()

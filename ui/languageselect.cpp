@@ -4,6 +4,8 @@
 #include "ui/languageselect.h"
 #include <ui_languageselect.h>
 
+#include <ui/common/installsettings.h>
+
 LanguageSelect::LanguageSelect(QWidget *parent) :
     InstallationStep (parent),
     ui(new Ui::LanguageSelect)
@@ -51,6 +53,14 @@ void LanguageSelect::on_listLanguageSelect_currentItemChanged(QListWidgetItem *c
 {
     QString selectedLang = current->data(Qt::UserRole).toString();
     langChanged(selectedLang);
+
+    // Send the language to installsettings
+    QStringList codes = selectedLang.split("_");
+    QString langCode = codes.first();
+    QString countryCode = codes.last();
+
+    InstallSettings::getInstance().setLangCode(langCode);
+    InstallSettings::getInstance().setCountryCode(countryCode);
 
     retranslate();
 }
