@@ -22,10 +22,13 @@
 # Pacman mirror based on the country
 export MPACMIRROR=http://www.archlinux.org/mirrorlist/?country=${MCOUNTRY}
 
+# ERASES THE DISK WARNING: THIS IS DANGEROUS
+wipefs -a "/dev/${MDEVICE}"
+
 # Creates a 2GB partition for SWAP
 # Creates a another partition for the rest of the disk
 echo "o
-m
+n
 p
 1
 
