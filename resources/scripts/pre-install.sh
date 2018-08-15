@@ -20,7 +20,7 @@
 #########################
 
 # Pacman mirror based on the country
-MPACMIRRORS="archlunux.org/mirrolist/?country=${COUNTRY}"
+export MPACMIRROR=http://www.archlinux.org/mirrorlist/?country=${MCOUNTRY}
 
 # Creates a 2GB partition for SWAP
 # Creates a another partition for the rest of the disk
@@ -51,7 +51,7 @@ mount "/dev/${MDEVICE}2" /mnt
 
 # Finds the fastest pacman mirrors based on the country
 cd /etc/pacman.d
-wget ${MPACMIRRORS} -O mirrorlist
+wget ${MPACMIRROR} -O mirrorlist
 sed -i 's/^#//' mirrorlist
 cd ~
 
