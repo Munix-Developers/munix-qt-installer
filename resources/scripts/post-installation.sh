@@ -19,12 +19,12 @@ cat <<EOF > /mnt/post-install.sh
 #!/bin/sh
 
 # Uncomment the desired location
-sed -i "s/^#${MLANG}\(\.*\)/${MLANG}\1/g" /etc/locale.gen
+sed -i "s/^#${MLOCALE}\(\.*\)/${MLOCALE}\1/g" /etc/locale.gen
 # Generate the locale
 locale-gen
 
-echo "LANG=${MLANG}.UTF-8" > /etc/locale.conf
-export LANG=${MLANG}.UTF-8
+echo "LANG=${MLOCALE}.UTF-8" > /etc/locale.conf
+export LANG=${MLOCALE}.UTF-8
 
 exit
 EOF
