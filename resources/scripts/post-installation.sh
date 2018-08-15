@@ -32,4 +32,4 @@ EOF
 chmod +x /mnt/post-install.sh
 
 # chroot to the pacman base created by the pre-installation.sh
-arch-chroot /mnt /mnt/post-install.sh
+arch-chroot /mnt /post-install.sh
