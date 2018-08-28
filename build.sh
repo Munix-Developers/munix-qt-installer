@@ -51,6 +51,26 @@ run_once() {
     fi
 }
 
+# Creates the munix custom repos
+make_repos() {
+    # Init the submodules
+    git submodule update --init --recursive -j 4
+
+    # Update the existing submodules
+    git submodule update --remote
+
+    # Create munix intaller package
+    cd modules/munix-installer-pkgbuild
+    sudo -H -u mat bash -c 'makepkg -f'
+    cp -v munix-installer*.tar ../../customrepos/munixtools
+
+    # Exit munix installer dir
+    cd ../../
+
+    # Add all the packages to the munixtools repo
+    repo-add customrepos/munixtools/munixtools.db.tar.gz customrepos/munixtools/*.pkg.tar
+}
+
 # Setup custom pacman.conf with current cache directories.
 make_pacman_conf() {
     local _cache_dirs
@@ -252,6 +272,8 @@ if [ ! -d ${work_dir} ]; then
     mount -t tmpfs -o size=8000m tmpfs ${work_dir}
 fi
 
+echo "--- CUSTOM REPO ---"
+run_once make_repos
 echo "--- PACMAN CONF ---"
 run_once make_pacman_conf
 echo "--- BASE REFS  ---"

@@ -1,0 +1,4 @@
+[submodule "modules/munix-installer-pkgbuild"]
+	path = modules/munix-installer-pkgbuild
+	url = https://MatMercer@bitbucket.org/munixdevelopers/munix-installer-pkgbuild.git
+	branch = master
