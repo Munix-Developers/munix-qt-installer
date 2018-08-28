@@ -52,3 +52,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     resources/translations/translations.qrc \
     resources/scripts/scripts.qrc
+
+INCLUDEPATH += ui
+INCLUDEPATH += ui/common
+
