@@ -20,4 +20,5 @@ tags
 
 customrepos/munixtools/*
 !customrepos/*/.gitkeep
+.directory
 
