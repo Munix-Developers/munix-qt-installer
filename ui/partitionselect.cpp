@@ -4,6 +4,7 @@
 #include <QDebug>
 #include <ui_partitionselect.h>
 #include <QProcess>
+#include <munixutils.h>
 
 #include <ui/common/partitionlister.h>
 #include <ui/common/installsettings.h>
@@ -80,17 +81,14 @@ void PartitionSelect::on_next_clicked()
 {
     InstallSettings::getInstance().sendToSystem();
 
-    QFile file(":/scripts/debug-env-vars.sh");
-    file.open(QIODevice::ReadOnly | QIODevice::Text);
-    QStringList arg;
-    arg << "-c";
+    auto args = new QStringList();
+    MunixUtils::SetupScriptArgs(args, "debug-env-vars.sh");
 
     process = new QProcess(this);
     connect(process, SIGNAL(readyReadStandardOutput()), this, SLOT(proccessOutput()));
     connect(process, SIGNAL(readyReadStandardError()), this, SLOT(proccessOutput()));
 
-    arg << file.readAll();
-    process->start("/bin/bash", arg);
+    process->start("/bin/bash", *args);
 }
 
 void PartitionSelect::on_partitionList_itemSelectionChanged()

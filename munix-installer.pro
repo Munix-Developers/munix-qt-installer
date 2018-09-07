@@ -29,7 +29,8 @@ SOURCES += \
     ui/partitionselect.cpp \
     ui/common/installationstep.cpp \
     ui/common/partitionlister.cpp \
-    ui/common/installsettings.cpp
+    ui/common/installsettings.cpp \
+    ui/common/munixutils.cpp
 
 HEADERS += \
         ui/mainwindow.h \
@@ -37,7 +38,8 @@ HEADERS += \
     ui/common/installationstep.h \
     ui/partitionselect.h \
     ui/common/partitionlister.h \
-    ui/common/installsettings.h
+    ui/common/installsettings.h \
+    ui/common/munixutils.h
 
 FORMS += \
         forms/mainwindow.ui \
