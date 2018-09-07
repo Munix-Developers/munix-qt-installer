@@ -15,6 +15,9 @@ gpg_key=
 verbose=""
 script_path=$(readlink -f ${0%/*})
 
+CYAN='\033[1;36m'
+NC='\033[0m'
+
 umask 0022
 
 _usage ()
@@ -241,6 +244,11 @@ make_iso() {
     mkarchiso ${verbose} -w "${work_dir}" -D "${install_dir}" -L "${iso_label}" -P "${iso_publisher}" -A "${iso_application}" -o "${out_dir}" iso "${iso_name}-${iso_version}-x86_64.iso"
 }
 
+# Cute Print
+cecho() {
+    echo -e "${CYAN}${1}${NC}"
+}
+
 if [[ ${EUID} -ne 0 ]]; then
     echo "This script must be run as root."
     _usage 1
@@ -272,31 +280,31 @@ if [ ! -d ${work_dir} ]; then
     mount -t tmpfs -o size=8000m tmpfs ${work_dir}
 fi
 
-echo "--- CUSTOM REPO ---"
+cecho "--- CUSTOM REPO ---"
 run_once make_repos
-echo "--- PACMAN CONF ---"
+cecho "--- PACMAN CONF ---"
 run_once make_pacman_conf
-echo "--- BASE REFS  ---"
+cecho "--- BASE REFS  ---"
 run_once make_basefs
-echo "--- MAKE PACKAGES  ---"
+cecho "--- MAKE PACKAGES  ---"
 run_once make_packages
-echo "--- MAKE INITCPIO  ---"
+cecho "--- MAKE INITCPIO  ---"
 run_once make_setup_mkinitcpio
-echo "--- CUSTOMIZE AIROOTFS  ---"
+cecho "--- CUSTOMIZE AIROOTFS  ---"
 run_once make_customize_airootfs
-echo "--- MAKE BOOT  ---"
+cecho "--- MAKE BOOT  ---"
 run_once make_boot
-echo "--- MAKE BOOT EXTRA ---"
+cecho "--- MAKE BOOT EXTRA ---"
 run_once make_boot_extra
-echo "--- MAKE SYSLINUX ---"
+cecho "--- MAKE SYSLINUX ---"
 run_once make_syslinux
-echo "--- MAKE ISOLINUX  ---"
+cecho "--- MAKE ISOLINUX  ---"
 run_once make_isolinux
-echo "--- MAKE EFI ---"
+cecho "--- MAKE EFI ---"
 run_once make_efi
-echo "--- MAKE EFIBOOT ---"
+cecho "--- MAKE EFIBOOT ---"
 run_once make_efiboot
-echo "--- MAKE PREPARE ---"
+cecho "--- MAKE PREPARE ---"
 run_once make_prepare
-echo "--- MAKE ISO ---"
+cecho "--- MAKE ISO ---"
 run_once make_iso
