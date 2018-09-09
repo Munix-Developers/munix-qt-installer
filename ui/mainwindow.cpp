@@ -33,6 +33,8 @@ MainWindow::MainWindow(QWidget *parent, QTranslator *translator) :
     // Next step buttons events
     connect(ui->languageselect, SIGNAL(stepFinished()),
             this, SLOT(nextStep()));
+    connect(ui->partitionSelect, SIGNAL(stepFinished()),
+            this, SLOT(nextStep()));
 
     // Back buttons events
     connect(ui->partitionSelect, SIGNAL(back()),
@@ -76,6 +78,10 @@ void MainWindow::nextStep()
     ui->installsteps->setCurrentIndex(nextStep);
 
     updateTitles();
+
+    InstallationStep *step = qobject_cast<InstallationStep*>(ui->installsteps->currentWidget());
+
+    step->onStart();
 }
 
 void MainWindow::previousStep()

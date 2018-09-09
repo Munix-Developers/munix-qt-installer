@@ -73,22 +73,14 @@ void PartitionSelect::reloadPartitions()
 
 void PartitionSelect::proccessOutput()
 {
-    qDebug() << QString(process->readAllStandardOutput());
+    QString(process->readAllStandardOutput());
     qDebug() << process->readAllStandardError();
 }
 
 void PartitionSelect::on_next_clicked()
 {
-    InstallSettings::getInstance().sendToSystem();
 
-    auto args = new QStringList();
-    MunixUtils::SetupScriptArgs(args, "debug-env-vars.sh");
-
-    process = new QProcess(this);
-    connect(process, SIGNAL(readyReadStandardOutput()), this, SLOT(proccessOutput()));
-    connect(process, SIGNAL(readyReadStandardError()), this, SLOT(proccessOutput()));
-
-    process->start("/bin/bash", *args);
+    stepFinished();
 }
 
 void PartitionSelect::on_partitionList_itemSelectionChanged()

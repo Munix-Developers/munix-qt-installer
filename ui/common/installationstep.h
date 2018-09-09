@@ -11,6 +11,7 @@ public:
 
     virtual QString title();
     virtual QString desc();
+    virtual void onStart();
 
 signals:
     void stepFinished();

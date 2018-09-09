@@ -115,6 +115,7 @@ color: white;</string>
      <widget class="QStackedWidget" name="installsteps">
       <widget class="LanguageSelect" name="languageselect"/>
       <widget class="PartitionSelect" name="partitionSelect"/>
+      <widget class="PreInstall" name="page"/>
      </widget>
     </item>
    </layout>
@@ -142,6 +143,12 @@ color: white;</string>
    <class>PartitionSelect</class>
    <extends>QWidget</extends>
    <header>partitionselect.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>PreInstall</class>
+   <extends>QWidget</extends>
+   <header>preinstall.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>
