@@ -90,7 +90,7 @@ void PartitionSelect::on_partitionList_itemSelectionChanged()
     if (list.size() > 0) {
         auto selectedPartition = list.first();
 
-        InstallSettings::getInstance().setDevName(selectedPartition->text(0));
+        InstallSettings::getInstance().setDevName(selectedPartition->parent()->text(0));
 
         ui->next->setEnabled(true);
     }

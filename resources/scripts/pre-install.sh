@@ -18,6 +18,7 @@
 #########################
 #	VARIABLES	#
 #########################
+source /tmp/munix-vars
 
 # Pacman mirror based on the country
 export MPACMIRROR=http://www.archlinux.org/mirrorlist/?country=${MCOUNTRY}
@@ -32,25 +33,20 @@ n
 p
 1
 
-+2G
-n
-p
-2
-
 
 
 w
 " | fdisk "/dev/${MDEVICE}"
 
 # Create the swap partition
-mkswap -L munix-swap "/dev/${MDEVICE}1"
+#mkswap -L munix-swap "/dev/${MDEVICE}1"
 
 # Create the root filesystem
 # TODO: maybe f2fs for SSD's here?
-mkfs.ext4 -L munix-root "/dev/${MDEVICE}2"
+mkfs.ext4 -F -L munix-root "/dev/${MDEVICE}1"
 
 # Mount the root filesystem
-mount "/dev/${MDEVICE}2" /mnt
+mount "/dev/${MDEVICE}1" /mnt
 
 # Finds the fastest pacman mirrors based on the country
 cd /etc/pacman.d
@@ -59,8 +55,9 @@ sed -i 's/^#//' mirrorlist
 cd ~
 
 # Base install
-pacman -Syy
 pacstrap /mnt base
 
 # Generate fstab
 genfstab -U -p /mnt >> /mnt/etc/fstab
+
+read

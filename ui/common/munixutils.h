@@ -2,13 +2,14 @@
 #define MUNIXUTILS_H
 
 #include <QProcess>
+#include <QTemporaryFile>
 
 class MunixUtils
 {
 public:
     MunixUtils();
 
-    static void SetupScriptArgs(QStringList *args, QString scriptName);
+    static QTemporaryFile *GetScriptTempFile(QString scriptName);
 };
 
 #endif // MUNIXUTILS_H

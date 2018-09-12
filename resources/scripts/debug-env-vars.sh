@@ -8,7 +8,11 @@
 # $MCOUNTRY	A string describing the COUNTRY (US, BR) etc...
 # $MLOCALE	A string used for localeCode (en_US, pt_BR) etc...
 
+source /tmp/munix-vars
+
 echo "MDEVICE: ${MDEVICE}"
 echo "MLANG: ${MLANG}"
 echo "MCOUNTRY: ${MCOUNTRY}"
 echo "MLOCALE: ${MLOCALE}"
+
+read

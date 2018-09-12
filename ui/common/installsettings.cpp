@@ -1,5 +1,7 @@
 #include "installsettings.h"
 
+#include <QFile>
+
 
 QString InstallSettings::getCountryCode() const
 {
@@ -36,10 +38,28 @@ QString InstallSettings::getLocaleCode() const
     return QString("%1_%2").arg(langCode, countryCode);
 }
 
+void InstallSettings::appendSourceVar(QString *sources, QString sourceName, QString value) {
+    sources->append(sourceName.append("="));
+    sources->append(value);
+    sources->append('\n');
+}
+
 void InstallSettings::sendToSystem()
 {
     qputenv("MDEVICE", devName.toUtf8());
     qputenv("MCOUNTRY", countryCode.toUtf8());
     qputenv("MLANG", langCode.toUtf8());
     qputenv("MLOCALE", getLocaleCode().toUtf8());
+
+    auto source = new QString();
+
+    appendSourceVar(source, "MDEVICE", devName);
+    appendSourceVar(source, "MCOUNTRY", countryCode);
+    appendSourceVar(source, "MLANG", langCode);
+    appendSourceVar(source, "MLOCALE", getLocaleCode());
+
+    QFile file("/tmp/munix-vars");
+    file.open(QFile::WriteOnly);
+    file.write(source->toUtf8());
+    file.close();
 }

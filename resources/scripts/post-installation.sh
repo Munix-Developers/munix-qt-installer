@@ -14,6 +14,8 @@
 # 1. Root privileges
 # 2. A active Internet connection
 
+source /tmp/munix-vars
+
 # This is the post-install script, executed inside chroot
 cat <<EOF > /mnt/post-install.sh
 #!/bin/sh

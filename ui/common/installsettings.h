@@ -40,6 +40,7 @@ private:
     // Device where Munix will be installed (eg. sda sdb sdc)
     QString devName;
 
+    void appendSourceVar(QString *sources, QString sourceName, QString value);
 };
 
 #endif // INSTALLSETTINGS_H
