@@ -15,6 +15,7 @@ gpg_key=
 verbose=""
 script_path=$(readlink -f ${0%/*})
 
+YELLOW='\033[1;93m'
 CYAN='\033[1;36m'
 NC='\033[0m'
 
@@ -41,6 +42,7 @@ _usage ()
     echo "                        Default: ${work_dir}"
     echo "    -o <out_dir>       Set the output directory"
     echo "                        Default: ${out_dir}"
+    echo "    -d                 Enable developer mode"
     echo "    -v                 Enable verbose output"
     echo "    -h                 This help message"
     exit ${1}
@@ -89,7 +91,9 @@ make_basefs() {
 
 # Additional packages (airootfs)
 make_packages() {
-    mkarchiso ${verbose} -w "${work_dir}/x86_64" -C "${work_dir}/pacman.conf" -D "${install_dir}" -p "$(grep -h -v ^# ${script_path}/packages.x86_64)" install
+    # If it is a developer iso
+    [[ $devel ]] && pacfile="packages-devel.x86_64" || pacfile="packages.x86_64"
+    mkarchiso ${verbose} -w "${work_dir}/x86_64" -C "${work_dir}/pacman.conf" -D "${install_dir}" -p "$(grep -h -v ^# ${script_path}/${pacfile})" install
 }
 
 # Copy mkinitcpio archiso hooks and build initramfs (airootfs)
@@ -120,7 +124,7 @@ make_setup_mkinitcpio() {
 make_customize_airootfs() {
     cp -af ${script_path}/airootfs ${work_dir}/x86_64
 
-    cp ${script_path}/pacman.conf ${work_dir}/x86_64/airootfs/etc
+    #cp ${script_path}/pacman.conf ${work_dir}/x86_64/airootfs/etc
 
     curl -o ${work_dir}/x86_64/airootfs/etc/pacman.d/mirrorlist 'https://www.archlinux.org/mirrorlist/?country=all&protocol=http&use_mirror_status=on'
 
@@ -249,12 +253,19 @@ cecho() {
     echo -e "${CYAN}${1}${NC}"
 }
 
+# Warn Print
+wecho() {
+    echo -e "${YELLOW}${1}${NC}"
+}
+
+
+
 if [[ ${EUID} -ne 0 ]]; then
     echo "This script must be run as root."
     _usage 1
 fi
 
-while getopts 'N:V:L:P:A:D:w:o:g:vh' arg; do
+while getopts 'N:V:L:P:A:D:w:o:g:dvh' arg; do
     case "${arg}" in
         N) iso_name="${OPTARG}" ;;
         V) iso_version="${OPTARG}" ;;
@@ -265,6 +276,7 @@ while getopts 'N:V:L:P:A:D:w:o:g:vh' arg; do
         w) work_dir="${OPTARG}" ;;
         o) out_dir="${OPTARG}" ;;
         g) gpg_key="${OPTARG}" ;;
+        d) devel="devel" ;;
         v) verbose="-v" ;;
         h) _usage 0 ;;
         *)
@@ -278,6 +290,14 @@ done
 if [ ! -d ${work_dir} ]; then
     mkdir -p ${work_dir}
     mount -t tmpfs -o size=8000m tmpfs ${work_dir}
+fi
+
+# Setup devel names for iso and label
+if [ ${devel} ];
+then
+    wecho "--- BUILDING DEVELOPER ISO --"
+    iso_name="${iso_name}-devel"
+    iso_label="DEVEL_${iso_label}"
 fi
 
 cecho "--- CUSTOM REPO ---"
