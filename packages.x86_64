@@ -33,6 +33,8 @@ mc
 mtools
 munix-installer
 ndisc6
+networkmanager
+network-manager-applet
 nfs-utils
 nilfs-utils
 nmap
