@@ -44,7 +44,7 @@ void InstallSettings::appendSourceVar(QString *sources, QString sourceName, QStr
     sources->append('\n');
 }
 
-void InstallSettings::sendToSystem()
+void InstallSettings::sendToSystem(bool chroot)
 {
     qputenv("MDEVICE", devName.toUtf8());
     qputenv("MCOUNTRY", countryCode.toUtf8());
@@ -62,4 +62,12 @@ void InstallSettings::sendToSystem()
     file.open(QFile::WriteOnly);
     file.write(source->toUtf8());
     file.close();
+
+    if (chroot)
+    {
+        QFile chrootFile("/mnt/munix-vars");
+        chrootFile.open(QFile::WriteOnly);
+        chrootFile.write(source->toUtf8());
+        chrootFile.close();
+    }
 }

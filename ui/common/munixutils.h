@@ -10,6 +10,9 @@ public:
     MunixUtils();
 
     static QTemporaryFile *GetScriptTempFile(QString scriptName);
+    static void SaveToChroot(QString resourceName);
+private:
+    static QFile *GetScriptFile(QString fileName);
 };
 
 #endif // MUNIXUTILS_H

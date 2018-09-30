@@ -26,7 +26,7 @@ public:
     QString getLocaleCode() const;
 
     // Used to setup env. vars based on the install settings
-    void sendToSystem();
+    void sendToSystem(bool chroot);
 
 private:
     InstallSettings() {}

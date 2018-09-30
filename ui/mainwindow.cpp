@@ -5,6 +5,7 @@
 
 #include <ui_mainwindow.h>
 #include <QDebug>
+#include <QCloseEvent>
 
 MainWindow::MainWindow(QWidget *parent, QTranslator *translator) :
     QMainWindow(parent),
@@ -14,6 +15,9 @@ MainWindow::MainWindow(QWidget *parent, QTranslator *translator) :
 
     // Disable resizing
     setFixedSize(800, 600);
+
+    // Always on top
+    setWindowFlags(Qt::WindowStaysOnTopHint);
 
     // Setup the instance of the translator
     local_translator = translator;
@@ -35,6 +39,8 @@ MainWindow::MainWindow(QWidget *parent, QTranslator *translator) :
             this, SLOT(nextStep()));
     connect(ui->partitionSelect, SIGNAL(stepFinished()),
             this, SLOT(nextStep()));
+    connect(ui->preInstall, SIGNAL(stepFinished()),
+            this, SLOT(nextStep()));
 
     // Back buttons events
     connect(ui->partitionSelect, SIGNAL(back()),
@@ -45,6 +51,11 @@ MainWindow::~MainWindow()
 {
     delete local_translator;
     delete ui;
+}
+
+void MainWindow::closeEvent(QCloseEvent * event)
+{
+    event->ignore();
 }
 
 /*

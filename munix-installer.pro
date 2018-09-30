@@ -31,7 +31,8 @@ SOURCES += \
     ui/common/partitionlister.cpp \
     ui/common/installsettings.cpp \
     ui/common/munixutils.cpp \
-    ui/preinstall.cpp
+    ui/preinstall.cpp \
+    ui/postinstall.cpp
 
 HEADERS += \
         ui/mainwindow.h \
@@ -41,13 +42,15 @@ HEADERS += \
     ui/common/partitionlister.h \
     ui/common/installsettings.h \
     ui/common/munixutils.h \
-    ui/preinstall.h
+    ui/preinstall.h \
+    ui/postinstall.h
 
 FORMS += \
         forms/mainwindow.ui \
     forms/languageselect.ui \
     forms/partitionselect.ui \
-    forms/preinstall.ui
+    forms/preinstall.ui \
+    forms/postinstall.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

@@ -14,24 +14,9 @@
 # 1. Root privileges
 # 2. A active Internet connection
 
-source /tmp/munix-vars
-
-# This is the post-install script, executed inside chroot
-cat <<EOF > /mnt/post-install.sh
-#!/bin/sh
-
-# Uncomment the desired location
-sed -i "s/^#${MLOCALE}\(\.*\)/${MLOCALE}\1/g" /etc/locale.gen
-# Generate the locale
-locale-gen
-
-echo "LANG=${MLOCALE}.UTF-8" > /etc/locale.conf
-export LANG=${MLOCALE}.UTF-8
-
-exit
-EOF
-
-chmod +x /mnt/post-install.sh
+chmod +x /mnt/post-install-chroot.sh
 
 # chroot to the pacman base created by the pre-installation.sh
-arch-chroot /mnt /post-install.sh
+arch-chroot /mnt /post-install-chroot.sh
+
+read

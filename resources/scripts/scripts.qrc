@@ -1,7 +1,8 @@
 <RCC>
     <qresource prefix="/scripts">
         <file>debug-env-vars.sh</file>
-        <file>post-installation.sh</file>
+        <file>post-install.sh</file>
         <file>pre-install.sh</file>
+        <file>post-install-chroot.sh</file>
     </qresource>
 </RCC>

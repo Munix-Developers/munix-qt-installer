@@ -1,39 +1,37 @@
-#ifndef PREINSTALL_H
-#define PREINSTALL_H
+#ifndef POSTINSTALL_H
+#define POSTINSTALL_H
 
 #include <QProcess>
 #include <QWidget>
 #include <installationstep.h>
 
 namespace Ui {
-class PreInstall;
+class PostInstall;
 }
 
-class PreInstall : public InstallationStep
+class PostInstall : public InstallationStep
 {
     Q_OBJECT
 
 public:
-    explicit PreInstall(QWidget *parent = nullptr);
-    ~PreInstall();
+    explicit PostInstall(QWidget *parent = nullptr);
+    ~PostInstall();
 
     QString title();
     QString desc();
     void onStart();
 
 private:
-    Ui::PreInstall *ui;
+    Ui::PostInstall *ui;
     QProcess *scriptProcess;
 
 public slots:
     void retranslate();
-
-private slots:
-    void onInstallFinished(int retVal, QProcess::ExitStatus status);
 
 signals:
     void stepFinished();
     void back();
 
 };
-#endif // PREINSTALL_H
+
+#endif // POSTINSTALL_H

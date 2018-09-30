@@ -33,6 +33,7 @@ private:
     int curInstallIdx = 0;
 
     void retranslate();
+    void closeEvent(QCloseEvent *event);
 };
 
 #endif // MAINWINDOW_H

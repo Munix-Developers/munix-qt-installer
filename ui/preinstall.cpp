@@ -5,6 +5,8 @@
 #include <installsettings.h>
 #include <munixutils.h>
 
+#include <QDebug>
+
 PreInstall::PreInstall(QWidget *parent) :
     InstallationStep (parent),
     ui(new Ui::PreInstall)
@@ -29,10 +31,10 @@ QString PreInstall::desc()
 
 void PreInstall::onStart()
 {
-    InstallSettings::getInstance().sendToSystem();
+    InstallSettings::getInstance().sendToSystem(false);
 
     auto args = new QStringList();
-    *args << "--geometry=80x24+0+0";
+    *args << "--geometry=80x24-130-100";
     *args << "-e";
     auto script = MunixUtils::GetScriptTempFile("pre-install.sh");
 
@@ -43,9 +45,7 @@ void PreInstall::onStart()
     *args << cmd;
 
     scriptProcess = new QProcess(this);
-    connect(scriptProcess, SIGNAL(readyReadStandardOutput()), this, SLOT(scriptOutput()));
-    connect(scriptProcess, SIGNAL(readyReadStandardError()), this, SLOT(scriptOutput()));
-
+    connect(scriptProcess , SIGNAL(finished(int,QProcess::ExitStatus)), this, SLOT(onInstallFinished(int, QProcess::ExitStatus)));
     scriptProcess->start("/usr/bin/xfce4-terminal", *args);
 }
 
@@ -54,8 +54,6 @@ void PreInstall::retranslate()
     ui->retranslateUi(this);
 }
 
-void PreInstall::scriptOutput()
-{
-    ui->tty->append(QString(scriptProcess->readAllStandardOutput()));
-    ui->tty->append(QString(scriptProcess->readAllStandardError()));
+void PreInstall::onInstallFinished(int retVal, QProcess::ExitStatus status) {
+    ui->next->setEnabled(true);
 }

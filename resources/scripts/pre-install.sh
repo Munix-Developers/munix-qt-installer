@@ -23,6 +23,8 @@ source /tmp/munix-vars
 # Pacman mirror based on the country
 export MPACMIRROR=http://www.archlinux.org/mirrorlist/?country=${MCOUNTRY}
 
+umount --all-targets /dev/${MDEVICE}*
+
 # ERASES THE DISK WARNING: THIS IS DANGEROUS
 wipefs -a "/dev/${MDEVICE}"
 
@@ -60,4 +62,4 @@ pacstrap /mnt base
 # Generate fstab
 genfstab -U -p /mnt >> /mnt/etc/fstab
 
-read
+exit
