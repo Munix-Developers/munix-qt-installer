@@ -32,7 +32,10 @@ SOURCES += \
     ui/common/installsettings.cpp \
     ui/common/munixutils.cpp \
     ui/preinstall.cpp \
-    ui/postinstall.cpp
+    ui/postinstall.cpp \
+    ui/minersetup.cpp \
+    ui/gpudetector.cpp \
+    ui/common/gpufinder.cpp
 
 HEADERS += \
         ui/mainwindow.h \
@@ -43,14 +46,19 @@ HEADERS += \
     ui/common/installsettings.h \
     ui/common/munixutils.h \
     ui/preinstall.h \
-    ui/postinstall.h
+    ui/postinstall.h \
+    ui/minersetup.h \
+    ui/gpudetector.h \
+    ui/common/gpufinder.h
 
 FORMS += \
         forms/mainwindow.ui \
     forms/languageselect.ui \
     forms/partitionselect.ui \
     forms/preinstall.ui \
-    forms/postinstall.ui
+    forms/postinstall.ui \
+    forms/minersetup.ui \
+    ui/gpudetector.ui
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

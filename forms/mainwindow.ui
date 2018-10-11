@@ -75,7 +75,7 @@ color: white;</string>
        <number>12</number>
       </property>
       <property name="text">
-       <string>Current Step</string>
+       <string/>
       </property>
       <property name="margin">
        <number>16</number>
@@ -94,7 +94,7 @@ color: white;</string>
        <string notr="true">font-size: 16px;</string>
       </property>
       <property name="text">
-       <string>Current Step detailed awesome and crazy description of what is going on.</string>
+       <string/>
       </property>
       <property name="wordWrap">
        <bool>true</bool>
@@ -116,6 +116,7 @@ color: white;</string>
       <widget class="LanguageSelect" name="languageselect"/>
       <widget class="PartitionSelect" name="partitionSelect"/>
       <widget class="PreInstall" name="preInstall"/>
+      <widget class="MinerSetup" name="minerSetup"/>
       <widget class="PostInstall" name="postInstall"/>
      </widget>
     </item>
@@ -156,6 +157,12 @@ color: white;</string>
    <class>PostInstall</class>
    <extends>QWidget</extends>
    <header>postinstall.h</header>
+   <container>1</container>
+  </customwidget>
+  <customwidget>
+   <class>MinerSetup</class>
+   <extends>QWidget</extends>
+   <header>minersetup.h</header>
    <container>1</container>
   </customwidget>
  </customwidgets>

@@ -6,6 +6,7 @@
 #include <ui_mainwindow.h>
 #include <QDebug>
 #include <QCloseEvent>
+#include <gpufinder.h>
 
 MainWindow::MainWindow(QWidget *parent, QTranslator *translator) :
     QMainWindow(parent),
@@ -33,6 +34,12 @@ MainWindow::MainWindow(QWidget *parent, QTranslator *translator) :
     // This is needed to change strings at runtime
     connect(this, SIGNAL(langChanged()),
             ui->partitionSelect, SLOT(retranslate()));
+    connect(this, SIGNAL(langChanged()),
+            ui->preInstall, SLOT(retranslate()));
+    connect(this, SIGNAL(langChanged()),
+            ui->minerSetup, SLOT(retranslate()));
+    connect(this, SIGNAL(langChanged()),
+            ui->postInstall, SLOT(retranslate()));
 
     // Next step buttons events
     connect(ui->languageselect, SIGNAL(stepFinished()),
@@ -45,6 +52,11 @@ MainWindow::MainWindow(QWidget *parent, QTranslator *translator) :
     // Back buttons events
     connect(ui->partitionSelect, SIGNAL(back()),
             this, SLOT(previousStep()));
+
+    // TODO: DELETE
+    auto gpuFind = new GpuFinder();
+
+    gpuFind->findGPUs();
 }
 
 MainWindow::~MainWindow()
